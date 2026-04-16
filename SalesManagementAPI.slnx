@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Business/SalesManagementAPI.Business.csproj" />
+  <Project Path="Core/SalesManagementAPI.Core.csproj" />
+  <Project Path="DataAccess/SalesManagementAPI.DataAccess.csproj" />
+  <Project Path="SalesManagementAPI/SalesManagementAPI.WebAPI.csproj" />
+</Solution>
