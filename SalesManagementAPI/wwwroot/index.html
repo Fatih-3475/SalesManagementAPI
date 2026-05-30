@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SalesPanel — Yönetim Sistemi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-logo">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-title">SalesPanel</div>
+                    <div class="brand-sub">Satış Yönetimi</div>
+                </div>
+            </div>
+
+            <nav class="nav">
+                <div class="nav-section">Genel</div>
+                <a href="#dashboard" class="nav-item active" data-page="dashboard">
+                    <i class="fa-solid fa-house nav-icon"></i> Dashboard
+                </a>
+
+                <div class="nav-section">Veri</div>
+                <a href="#customers" class="nav-item" data-page="customers">
+                    <i class="fa-solid fa-users nav-icon"></i> Müşteriler
+                </a>
+                <a href="#products" class="nav-item" data-page="products">
+                    <i class="fa-solid fa-box nav-icon"></i> Ürünler
+                </a>
+                <a href="#orders" class="nav-item" data-page="orders">
+                    <i class="fa-solid fa-cart-shopping nav-icon"></i> Siparişler
+                </a>
+
+                <div class="nav-section">Analiz</div>
+                <a href="#reports" class="nav-item" data-page="reports">
+                    <i class="fa-solid fa-chart-pie nav-icon"></i> Analitikler
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+            </div>
+        </aside>
+
+        <div class="main">
+
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="menu-toggle" id="menuToggle">☰</button>
+                    <h1 class="topbar-title" id="topbarTitle">Dashboard</h1>
+                </div>
+                <div class="topbar-right">
+                    <button class="btn-primary" id="topbarBtn" style="display:none">
+                        <i class="fa-solid fa-plus"></i> <span id="btnLabel">Yeni Kayıt</span>
+                    </button>
+                </div>
+            </header>
+
+            <main class="content-area">
+
+                <section class="page active" id="page-dashboard">
+                    <div class="stats-row">
+                        <div class="stat-card stat-card-customers">
+                            <div class="stat-card-icon"><i class="fa-solid fa-users"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-label">Toplam Müşteri</div>
+                                <div class="stat-val" id="stat-customers">—</div>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-products">
+                            <div class="stat-card-icon"><i class="fa-solid fa-cube"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-label">Aktif Ürün</div>
+                                <div class="stat-val" id="stat-products">—</div>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-orders">
+                            <div class="stat-card-icon"><i class="fa-solid fa-shopping-cart"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-label">Toplam Sipariş</div>
+                                <div class="stat-val" id="stat-orders">—</div>
+                            </div>
+                        </div>
+                        <div class="stat-card stat-card-revenue">
+                            <div class="stat-card-icon"><i class="fa-solid fa-chart-line"></i></div>
+                            <div class="stat-content">
+                                <div class="stat-label">Toplam Satış</div>
+                                <div class="stat-val" id="stat-revenue">—</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title"><i class="fa-solid fa-clock" style="margin-right: 6px; color: var(--color-primary);"></i>Son Siparişler</span>
+                            <span class="badge" id="dashboard-orders-count">—</span>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>#</th><th>Müşteri</th><th>Tarih</th><th>Toplam</th></tr>
+                                </thead>
+                                <tbody id="dashboard-orders-tbody">
+                                    <tr><td colspan="4" class="loading-row">Yükleniyor...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="page" id="page-customers">
+
+                    <div class="card" id="customer-form-card">
+                        <div class="card-header">
+                            <span class="card-title">Yeni Müşteri Ekle</span>
+                            <button class="btn-secondary" id="closeCustomerForm">✕ Kapat</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Ad Soyad</label>
+                                    <input type="text" id="customer-name" placeholder="Ahmet Yılmaz" />
+                                </div>
+                                <div class="form-group">
+                                    <label>E-posta</label>
+                                    <input type="email" id="customer-email" placeholder="ahmet@gmail.com" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Telefon</label>
+                                    <input type="tel" id="customer-phone" placeholder="05551234567" />
+                                </div>
+                                <div class="form-actions">
+                                    <button class="btn-secondary" id="closeCustomerForm2">İptal</button>
+                                    <button class="btn-primary" id="saveCustomerBtn">Kaydet</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">Müşteri Listesi</span>
+                            <span class="badge" id="customers-count">—</span>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>ID</th><th>Ad Soyad</th><th>E-posta</th><th>Telefon</th></tr>
+                                </thead>
+                                <tbody id="customers-tbody">
+                                    <tr><td colspan="4" class="loading-row">Yükleniyor...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <section class="page" id="page-products">
+
+                    <div class="card" id="product-form-card">
+                        <div class="card-header">
+                            <span class="card-title">Yeni Ürün Ekle</span>
+                            <button class="btn-secondary" id="closeProductForm">✕ Kapat</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Ürün Adı</label>
+                                    <input type="text" id="product-name" placeholder="Laptop Pro X" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Fiyat (₺)</label>
+                                    <input type="number" id="product-price" placeholder="0.00" min="0" step="0.01" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Stok</label>
+                                    <input type="number" id="product-stock" placeholder="0" min="0" />
+                                </div>
+                                <div class="form-actions">
+                                    <button class="btn-secondary" id="closeProductForm2">İptal</button>
+                                    <button class="btn-primary" id="saveProductBtn">Kaydet</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">Ürün Listesi</span>
+                            <span class="badge" id="products-count">—</span>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>ID</th><th>Ürün Adı</th><th>Fiyat</th><th>Stok</th></tr>
+                                </thead>
+                                <tbody id="products-tbody">
+                                    <tr><td colspan="4" class="loading-row">Yükleniyor...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+                <section class="page" id="page-orders">
+
+                    <div class="card" id="order-form-card">
+                        <div class="card-header">
+                            <span class="card-title">Yeni Sipariş Oluştur</span>
+                            <button class="btn-secondary" id="closeOrderForm">✕ Kapat</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-grid">
+                                <div class="form-group full">
+                                    <label>Müşteri</label>
+                                    <select id="order-customer">
+                                        <option value="">Müşteri seçin...</option>
+                                    </select>
+                                </div>
+                                <div class="form-group full">
+                                    <label>Ürünler</label>
+                                    <div id="order-items"></div>
+                                    <button class="btn-secondary" id="addOrderItemBtn" style="margin-top:8px">+ Ürün Ekle</button>
+                                </div>
+                                <div class="form-actions">
+                                    <button class="btn-secondary" id="closeOrderForm2">İptal</button>
+                                    <button class="btn-primary" id="saveOrderBtn">Siparişi Kaydet</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" id="order-filter-card">
+                        <div class="card-header">
+                            <span class="card-title">Filtrele</span>
+                            <button class="btn-secondary" id="clearFilterBtn">Temizle</button>
+                        </div>
+                        <div class="card-body">
+                            <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;align-items:flex-end">
+                                <div class="form-group">
+                                    <label>Başlangıç Tarihi</label>
+                                    <input type="date" id="filter-start" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Bitiş Tarihi</label>
+                                    <input type="date" id="filter-end" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Min Tutar (₺)</label>
+                                    <input type="number" id="filter-min" placeholder="0" min="0" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Max Tutar (₺)</label>
+                                    <input type="number" id="filter-max" placeholder="99999" min="0" />
+                                </div>
+                            </div>
+                            <div style="margin-top:10px;text-align:right">
+                                <button class="btn-primary" id="applyFilterBtn">Filtrele</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title">Sipariş Listesi</span>
+                            <span class="badge" id="orders-count">—</span>
+                        </div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr><th>#</th><th>Müşteri</th><th>Tarih</th><th>Toplam</th><th>Detay</th></tr>
+                                </thead>
+                                <tbody id="orders-tbody">
+                                    <tr><td colspan="5" class="loading-row">Yükleniyor...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Detay Modal -->
+                    <div id="order-detail-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.3);z-index:200;align-items:center;justify-content:center">
+                        <div style="background:#fff;border-radius:12px;width:480px;max-width:90vw;overflow:hidden">
+                            <div class="card-header">
+                                <span class="card-title" id="detail-title">Sipariş Detayı</span>
+                                <button class="btn-secondary" id="closeDetailBtn">✕ Kapat</button>
+                            </div>
+                            <div class="card-body" id="detail-body"></div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- Raporlar -->
+                <section class="page" id="page-reports">
+
+                    <!-- Özet Kartlar -->
+                    <div class="stats-row" style="grid-template-columns:1fr 1fr 1fr">
+                        <div class="stat-card stat-card-revenue" style="padding: 16px;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                <div style="background: rgba(59, 109, 17, 0.1); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa-solid fa-money-bill-wave" style="font-size: 18px; color: var(--color-primary);"></i>
+                                </div>
+                            </div>
+                            <div class="stat-label">Toplam Satış Tutarı</div>
+                            <div class="stat-val" id="report-total">—</div>
+                        </div>
+                        <div class="stat-card stat-card-customers" style="padding: 16px;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                <div style="background: rgba(99, 153, 34, 0.1); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa-solid fa-star" style="font-size: 18px; color: #639922;"></i>
+                                </div>
+                            </div>
+                            <div class="stat-label">En İyi Müşteri</div>
+                            <div class="stat-val" id="report-top-customer" style="font-size:16px">—</div>
+                            <div class="stat-sub" id="report-top-customer-count"></div>
+                        </div>
+                        <div class="stat-card stat-card-products" style="padding: 16px;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                <div style="background: rgba(151, 196, 89, 0.1); width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fa-solid fa-fire" style="font-size: 18px; color: #97C459;"></i>
+                                </div>
+                            </div>
+                            <div class="stat-label">En Çok Satan Ürün</div>
+                            <div class="stat-val" id="report-top-product" style="font-size:16px">—</div>
+                            <div class="stat-sub" id="report-top-product-qty"></div>
+                        </div>
+                    </div>
+
+                    <!-- Detay Kart -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title"><i class="fa-solid fa-chart-bar" style="margin-right: 6px; color: var(--color-primary);"></i>Satış Analitikleri</span>
+                            <span class="badge" id="report-badge">Detaylı Veriler</span>
+                        </div>
+                        <div class="card-body" id="report-detail">
+                            <p style="color:var(--color-text-tertiary)">Yükleniyor...</p>
+                        </div>
+                    </div>
+
+                </section>
+
+            </main>
+        </div>
+    </div>
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="js/app.js"></script>
+    
+</body>
+</html>

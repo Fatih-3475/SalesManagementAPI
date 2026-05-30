@@ -37,6 +37,12 @@ public class SalesManagementDbContext : DbContext
 
             entity.Property(x => x.CreatedDate)
                   .IsRequired();
+
+            entity.HasIndex(x => x.Email)
+            .IsUnique();
+
+            entity.HasIndex(x => x.Phone)
+            .IsUnique();
         });
 
         modelBuilder.Entity<Product>(entity =>
@@ -52,6 +58,9 @@ public class SalesManagementDbContext : DbContext
 
             entity.Property(x => x.Stock)
                   .IsRequired();
+
+            entity.HasIndex(x => x.Name)
+            .IsUnique();
         });
 
         modelBuilder.Entity<Order>(entity =>

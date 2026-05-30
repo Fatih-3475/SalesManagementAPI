@@ -6,7 +6,7 @@ namespace SalesManagementAPI.Core.Constants
         public const string CustomerNotFound = "CustomerNotFound";
         public const string ProductNotFound = "ProductNotFound";
         public const string InsufficientStock = "InsufficientStock";
-        public const string InvalidOrder = "InvalidOrder";
+        public const string InvalidOrder = "InvalidOrder"; // hata kodunu düzgün vermek içni
         public const string ValidationError = "ValidationError";
     }
 }

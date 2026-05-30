@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: GSfener2040
+      POSTGRES_DB: SalesManagementDb
+    ports:
+      - "5433:5432"
+
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__PostgreSql=Host=db;Port=5432;Database=SalesManagementDb;Username=postgres;Password=GSfener2040
+    depends_on:
+      - db

@@ -25,4 +25,8 @@
     <ProjectReference Include="..\DataAccess\SalesManagementAPI.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\pages\" />
+  </ItemGroup>
+
 </Project>

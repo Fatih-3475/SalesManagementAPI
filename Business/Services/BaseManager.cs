@@ -2,7 +2,7 @@
 
 namespace SalesManagementAPI.Business.Services
 {
-    public abstract class BaseManager
+    public abstract class BaseManager 
     {
         protected void AddError(BaseResponse response,Action<ErrorOptions> configure)
         {
